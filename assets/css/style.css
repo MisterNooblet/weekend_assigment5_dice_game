@@ -195,9 +195,6 @@ img {
   border-style: solid;
   padding: 2rem 2rem;
 }
-.game-controls {
-  margin: 0.5rem;
-}
 .current-score {
   display: flex;
   flex-direction: column;
