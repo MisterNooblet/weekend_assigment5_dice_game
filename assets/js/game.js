@@ -12,6 +12,8 @@ const dice1 = document.querySelector("#dice-1");
 const dice2 = document.querySelector("#dice-2");
 const p1Current = document.querySelector('#p1score-current');
 const p2Current = document.querySelector('#p2score-current');
+//Sounds
+const diceRollSound = document.querySelector('#dice-roll-sound')
 //Event Listeners
 startBtn.addEventListener('click', startGame);
 rollBtn.addEventListener('click', rollDice);
@@ -50,6 +52,7 @@ function swapDice() {
     dice2.src = `/assets/images/${die2val}.png`;
     dice1.classList.toggle('dice1-anim')
     dice2.classList.toggle('dice1-anim')
+    diceRollSound.play();
     setTimeout(function () {
         dice1.classList.toggle('dice1-anim')
         dice2.classList.toggle('dice1-anim')
