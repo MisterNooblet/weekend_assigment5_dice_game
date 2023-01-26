@@ -14,6 +14,14 @@ const p1Current = document.querySelector('#p1score-current');
 const p2Current = document.querySelector('#p2score-current');
 const p1Total = document.querySelector('#p1score-total');
 const p2Total = document.querySelector('#p2score-total');
+const p1Card = document.querySelector('#p1-card')
+const p2Card = document.querySelector('#p2-card')
+const p2wingif = document.querySelector('#p2wingif');
+const p1wingif = document.querySelector('#p1wingif');
+const p1cbBox = document.querySelectorAll('.p1cb-box')
+const p2cbBox = document.querySelectorAll('.p2cb-box')
+const p2wintxt = document.querySelector('#p2wintxt')
+const p1wintxt = document.querySelector('#p1wintxt')
 //Sounds
 const diceRollSound = document.querySelector('#dice-roll-sound')
 //Event Listeners
@@ -49,6 +57,7 @@ function holdScore() {
         localStorage.setItem('player1', JSON.stringify(player1))
     }
     updateUI()
+    checkScores()
 }
 
 function rollDice() {
@@ -69,6 +78,38 @@ function rollDice() {
     }
     updateUI()
     swapDice()
+}
+
+function checkScores() {
+    let totalScore = localStorage.getItem('targetScore');
+    let player1 = JSON.parse(localStorage.getItem('player1'))
+    let player2 = JSON.parse(localStorage.getItem('player2'))
+    if (player1.totalScore > totalScore) {
+        rollBtn.disabled = true;
+        holdBtn.disabled = true;
+        p1Card.classList.add('waiting')
+        p2Card.classList.add('winner')
+        p2Card.classList.remove('waiting')
+        for (let i = 0; i < p2cbBox.length; i++) {
+            p2cbBox[i].style.display = 'none'
+            p2wingif.style.display = ''
+        }
+        p2wintxt.innerHTML = 'YOU WIN'
+    } else if (player2.totalScore > totalScore) {
+        rollBtn.disabled = true;
+        holdBtn.disabled = true;
+        p2Card.classList.add('waiting')
+        p1Card.classList.add('winner')
+        p1Card.classList.remove('waiting')
+        for (let i = 0; i < p1cbBox.length; i++) {
+            p1cbBox[i].style.display = 'none'
+            p1wingif.style.display = ''
+        }
+        p1wintxt.innerHTML = 'YOU WIN'
+    } else {
+        p1Card.classList.toggle('waiting')
+        p2Card.classList.toggle('waiting')
+    }
 }
 //DOM Manipulation Functions
 function swapDice() {

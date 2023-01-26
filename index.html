@@ -27,19 +27,21 @@
                 <li>If you managed to reach exactly the target score - you win! If you passed it - you lose.</li>
             </ul>
             <h1>Please select a target score</h1>
-            <input type="number" name="target-score" id="target-score" min="12" max="100000000" value="12" autofocus>
+            <input type="number" name="target-score" id="target-score" min="12" max="100000000" value="50" autofocus>
             <div class="intro-btns">
                 <button id="start-btn" class="btn">2 PLAYERS</button>
                 <button id="ai-btn" class="btn">PLAY VS AI</button>
             </div>
         </div>
         <div id="game-container" class="gamecontainer" style="display: none;">
-            <div class="player-card">
+            <div id="p1-card" class="player-card">
                 <H1>Player 1</H1>
                 <H2 id="p1score-total">0</H2>
+                <h1 id="p1wintxt"></h1>
                 <div class="current-score">
-                    <h3>CURRENT</h3>
-                    <h4 id="p1score-current">0</h4>
+                    <img id="p1wingif" src="/assets/images/p1win.gif" style="display: none;" alt="">
+                    <h3 class="p1cb-box">CURRENT</h3>
+                    <h4 id="p1score-current" class="p1cb-box">0</h4>
                 </div>
             </div>
             <div class="game-controls">
@@ -49,12 +51,14 @@
                 <button id="roll-btn" class="btn">ROLL DICE</button>
                 <button id="hold-btn" class="btn">HOLD</button>
             </div>
-            <div class="player-card">
+            <div id="p2-card" class="player-card waiting ">
                 <H1>Player 2</H1>
                 <H2 id="p2score-total">0</H2>
+                <h1 id="p2wintxt"></h1>
                 <div class="current-score">
-                    <h3>CURRENT</h3>
-                    <h4 id="p2score-current">0</h4>
+                    <img id="p2wingif" src="/assets/images/p2win.gif" style="display: none;" alt="">
+                    <h3 class="p2cb-box">CURRENT</h3>
+                    <h4 id="p2score-current" class="p2cb-box">0</h4>
                 </div>
             </div>
         </div>
