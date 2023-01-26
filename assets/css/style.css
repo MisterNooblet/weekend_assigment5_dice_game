@@ -20,15 +20,14 @@ img {
   height: 100vh;
   width: 100vw;
   display: flex;
+  justify-content: center;
   /* padding: 6rem; */
   border-image-slice: 60 60 60 60;
   border-image-width: 60px 60px 60px 60px;
   border-image-outset: 0px 0px 0px 0px;
   border-image-repeat: stretch stretch;
   border-image-source: url('/assets/images/bgbordernofill1.png');
-
   border-style: solid;
-
   background: rgb(233, 223, 196);
 
   background: -moz-linear-gradient(
@@ -145,14 +144,14 @@ img {
   background-repeat: repeat;
 }
 
-#gamecontainer {
+.gamecontainer {
   display: flex;
   justify-content: center;
   background-color: #563232;
   background-color: rgba(86, 50, 50, 0.5);
   width: fit-content;
   height: fit-content;
-  margin: auto auto;
+  margin: 60px;
   justify-self: center;
   align-self: center;
   border-image-slice: 60 60 60 60;
@@ -162,6 +161,15 @@ img {
   border-image-source: url('/assets/images/bgbordernofill2.png');
   border-radius: 0.5rem;
   border-style: solid;
+}
+.gamecontainer ul {
+  list-style-type: none;
+  line-height: 2rem;
+  text-align: center;
+}
+.flex-column {
+  flex-direction: column;
+  align-items: center;
 }
 .player-card {
   flex-grow: 1;
@@ -226,4 +234,17 @@ img {
   font-family: 'Press Start 2P';
   padding: 0.5rem 0.3rem;
   cursor: url('/assets/images/cursor-click.png'), pointer;
+}
+
+#target-score {
+  font-family: 'Press Start 2P';
+  text-align: center;
+  margin: 1rem 0;
+  background-color: #e7cfb4;
+  border: #563232 3px solid;
+  border-radius: 5px;
+  padding: 0.5rem 0.3rem;
+}
+#start-btn {
+  margin-bottom: 1rem;
 }

@@ -16,7 +16,24 @@
 
 <body>
     <section id="gamewindow">
-        <div id="gamecontainer">
+        <div class="gamecontainer flex-column">
+            <h1>Welcome to Dice Game</h1>
+            <h2>Game Instructions</h2>
+            <ul>
+                <li>In your turn - roll the dice [at least once] and accumulate the result in "Current".</li>
+                <li>You can roll again or click "Hold" to save the points from "Current" and end the turn.</li>
+                <li>Note! If you get 6-6 - you will lose all points from "Current" and the turn will go to your
+                    opponent.</li>
+                <li>If you managed to reach exactly the target score - you win! If you passed it - you lose.</li>
+            </ul>
+            <h1>Please select a target score</h1>
+            <input type="number" name="target-score" id="target-score" min="12" max="100000000" value="12" autofocus>
+            <div class="intro-btns">
+                <button id="start-btn" class="btn">2 PLAYERS</button>
+                <button id="ai-btn" class="btn">PLAY VS AI</button>
+            </div>
+        </div>
+        <div class="gamecontainer" style="display: none;">
             <div class="player-card">
                 <H1>Player 1</H1>
                 <H2 id="p1score-total">0</H2>
