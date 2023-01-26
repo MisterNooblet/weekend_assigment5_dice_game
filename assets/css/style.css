@@ -1,0 +1,138 @@
+html {
+}
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 62.5%;
+  overflow-y: hidden; /* Hide vertical scrollbar */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+#gamewindow {
+  height: 100vh;
+  width: 100vw;
+  border-image-slice: 60 60 60 60;
+  border-image-width: 60px 60px 60px 60px;
+  border-image-outset: 0px 0px 0px 0px;
+  border-image-repeat: stretch stretch;
+  border-image-source: url('/assets/images/bgbordernofill.png');
+
+  border-style: solid;
+  /* background-color: #ffc18c; */
+
+  background: rgb(233, 223, 196);
+
+  background: -moz-linear-gradient(
+    left,
+    rgba(233, 223, 196, 1) 0%,
+    rgba(233, 223, 196, 1) 1%,
+    rgba(237, 227, 200, 1) 2%,
+    rgba(237, 227, 200, 1) 24%,
+    rgba(235, 221, 195, 1) 25%,
+    rgba(233, 223, 196, 1) 48%,
+    rgba(235, 221, 195, 1) 49%,
+    rgba(230, 216, 189, 1) 52%,
+    rgba(230, 216, 189, 1) 53%,
+    rgba(233, 219, 192, 1) 54%,
+    rgba(230, 216, 189, 1) 55%,
+    rgba(230, 216, 189, 1) 56%,
+    rgba(233, 219, 192, 1) 57%,
+    rgba(230, 216, 189, 1) 58%,
+    rgba(230, 216, 189, 1) 73%,
+    rgba(233, 219, 192, 1) 74%,
+    rgba(233, 219, 192, 1) 98%,
+    rgba(235, 221, 195, 1) 100%
+  );
+
+  background: -webkit-linear-gradient(
+    left,
+    rgba(233, 223, 196, 1) 0%,
+    rgba(233, 223, 196, 1) 1%,
+    rgba(237, 227, 200, 1) 2%,
+    rgba(237, 227, 200, 1) 24%,
+    rgba(235, 221, 195, 1) 25%,
+    rgba(233, 223, 196, 1) 48%,
+    rgba(235, 221, 195, 1) 49%,
+    rgba(230, 216, 189, 1) 52%,
+    rgba(230, 216, 189, 1) 53%,
+    rgba(233, 219, 192, 1) 54%,
+    rgba(230, 216, 189, 1) 55%,
+    rgba(230, 216, 189, 1) 56%,
+    rgba(233, 219, 192, 1) 57%,
+    rgba(230, 216, 189, 1) 58%,
+    rgba(230, 216, 189, 1) 73%,
+    rgba(233, 219, 192, 1) 74%,
+    rgba(233, 219, 192, 1) 98%,
+    rgba(235, 221, 195, 1) 100%
+  );
+
+  background: -o-linear-gradient(
+    left,
+    rgba(233, 223, 196, 1) 0%,
+    rgba(233, 223, 196, 1) 1%,
+    rgba(237, 227, 200, 1) 2%,
+    rgba(237, 227, 200, 1) 24%,
+    rgba(235, 221, 195, 1) 25%,
+    rgba(233, 223, 196, 1) 48%,
+    rgba(235, 221, 195, 1) 49%,
+    rgba(230, 216, 189, 1) 52%,
+    rgba(230, 216, 189, 1) 53%,
+    rgba(233, 219, 192, 1) 54%,
+    rgba(230, 216, 189, 1) 55%,
+    rgba(230, 216, 189, 1) 56%,
+    rgba(233, 219, 192, 1) 57%,
+    rgba(230, 216, 189, 1) 58%,
+    rgba(230, 216, 189, 1) 73%,
+    rgba(233, 219, 192, 1) 74%,
+    rgba(233, 219, 192, 1) 98%,
+    rgba(235, 221, 195, 1) 100%
+  );
+
+  background: -ms-linear-gradient(
+    left,
+    rgba(233, 223, 196, 1) 0%,
+    rgba(233, 223, 196, 1) 1%,
+    rgba(237, 227, 200, 1) 2%,
+    rgba(237, 227, 200, 1) 24%,
+    rgba(235, 221, 195, 1) 25%,
+    rgba(233, 223, 196, 1) 48%,
+    rgba(235, 221, 195, 1) 49%,
+    rgba(230, 216, 189, 1) 52%,
+    rgba(230, 216, 189, 1) 53%,
+    rgba(233, 219, 192, 1) 54%,
+    rgba(230, 216, 189, 1) 55%,
+    rgba(230, 216, 189, 1) 56%,
+    rgba(233, 219, 192, 1) 57%,
+    rgba(230, 216, 189, 1) 58%,
+    rgba(230, 216, 189, 1) 73%,
+    rgba(233, 219, 192, 1) 74%,
+    rgba(233, 219, 192, 1) 98%,
+    rgba(235, 221, 195, 1) 100%
+  );
+
+  background: linear-gradient(
+    left,
+    rgba(233, 223, 196, 1) 0%,
+    rgba(233, 223, 196, 1) 1%,
+    rgba(237, 227, 200, 1) 2%,
+    rgba(237, 227, 200, 1) 24%,
+    rgba(235, 221, 195, 1) 25%,
+    rgba(233, 223, 196, 1) 48%,
+    rgba(235, 221, 195, 1) 49%,
+    rgba(230, 216, 189, 1) 52%,
+    rgba(230, 216, 189, 1) 53%,
+    rgba(233, 219, 192, 1) 54%,
+    rgba(230, 216, 189, 1) 55%,
+    rgba(230, 216, 189, 1) 56%,
+    rgba(233, 219, 192, 1) 57%,
+    rgba(230, 216, 189, 1) 58%,
+    rgba(230, 216, 189, 1) 73%,
+    rgba(233, 219, 192, 1) 74%,
+    rgba(233, 219, 192, 1) 98%,
+    rgba(235, 221, 195, 1) 100%
+  );
+
+  background-size: 120px;
+  background-repeat: repeat;
+}
