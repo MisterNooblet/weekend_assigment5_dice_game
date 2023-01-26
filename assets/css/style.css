@@ -9,6 +9,7 @@ body {
   overflow-x: hidden; /* Hide horizontal scrollbar */
   /* font-family: 'Chester', monospace; */
   font-family: 'Press Start 2P';
+  cursor: url('/assets/images/cursor.png'), auto;
 }
 
 img {
@@ -219,14 +220,10 @@ img {
 }
 
 .btn {
-  background-color: #da6d42;
-  border: none;
-  border-image-slice: 60 60 60 60;
-  border-image-width: 60px 60px 60px 60px;
-  border-image-outset: 0px 0px 0px 0px;
-  border-image-repeat: stretch stretch;
-  border-image-source: url('/assets/images/bgbordernofill3.png');
-  border-style: solid;
+  background-color: #e7cfb4;
+  border: #563232 3px solid;
+  border-radius: 5px;
   font-family: 'Press Start 2P';
   padding: 0.5rem 0.3rem;
+  cursor: url('/assets/images/cursor-click.png'), pointer;
 }
