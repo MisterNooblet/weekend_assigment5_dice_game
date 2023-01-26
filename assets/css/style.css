@@ -7,19 +7,26 @@ body {
   font-size: 62.5%;
   overflow-y: hidden; /* Hide vertical scrollbar */
   overflow-x: hidden; /* Hide horizontal scrollbar */
+  /* font-family: 'Chester', monospace; */
+  font-family: 'Press Start 2P';
+}
+
+img {
+  image-rendering: pixelated;
 }
 
 #gamewindow {
   height: 100vh;
   width: 100vw;
+  display: flex;
+  /* padding: 6rem; */
   border-image-slice: 60 60 60 60;
   border-image-width: 60px 60px 60px 60px;
   border-image-outset: 0px 0px 0px 0px;
   border-image-repeat: stretch stretch;
-  border-image-source: url('/assets/images/bgbordernofill.png');
+  border-image-source: url('/assets/images/bgbordernofill1.png');
 
   border-style: solid;
-  /* background-color: #ffc18c; */
 
   background: rgb(233, 223, 196);
 
@@ -135,4 +142,91 @@ body {
 
   background-size: 120px;
   background-repeat: repeat;
+}
+
+#gamecontainer {
+  display: flex;
+  justify-content: center;
+  background-color: #563232;
+  background-color: rgba(86, 50, 50, 0.5);
+  width: fit-content;
+  height: fit-content;
+  margin: auto auto;
+  justify-self: center;
+  align-self: center;
+  border-image-slice: 60 60 60 60;
+  border-image-width: 60px 60px 60px 60px;
+  border-image-outset: 0px 0px 0px 0px;
+  border-image-repeat: stretch stretch;
+  border-image-source: url('/assets/images/bgbordernofill2.png');
+  border-radius: 0.5rem;
+  border-style: solid;
+}
+.player-card {
+  flex-grow: 1;
+  display: flex;
+
+  justify-content: flex-start;
+  align-items: center;
+  /* flex-flow: column; */
+  flex-direction: column;
+  padding: 2rem 4rem;
+}
+
+.player-card h1 {
+  font-size: 1.5rem;
+}
+
+#p1score-total,
+#p2score-total {
+  font-size: 2rem;
+  padding-bottom: 10rem;
+}
+
+.game-controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-image-slice: 60 60 60 60;
+  border-image-width: 60px 60px 60px 60px;
+  border-image-outset: 0px 0px 0px 0px;
+  border-image-repeat: stretch stretch;
+  border-image-source: url('/assets/images/bgbordernofill3.png');
+  border-style: solid;
+  padding: 0 2rem;
+}
+.current-score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+  flex-grow: 1;
+  border-image-slice: 60 60 60 60;
+  border-image-width: 60px 60px 60px 60px;
+  border-image-outset: 0px 0px 0px 0px;
+  border-image-repeat: stretch stretch;
+  border-image-source: url('/assets/images/bgbordernofill2.png');
+  border-style: solid;
+  width: 100%;
+  background-color: rgba(86, 50, 50, 0.3);
+  border-radius: 0.4rem;
+}
+.current-score h3 {
+  font-size: 1rem;
+}
+.current-score h4 {
+  font-size: 1.5rem;
+}
+
+.btn {
+  background-color: #da6d42;
+  border: none;
+  border-image-slice: 60 60 60 60;
+  border-image-width: 60px 60px 60px 60px;
+  border-image-outset: 0px 0px 0px 0px;
+  border-image-repeat: stretch stretch;
+  border-image-source: url('/assets/images/bgbordernofill3.png');
+  border-style: solid;
+  font-family: 'Press Start 2P';
+  padding: 0.5rem 0.3rem;
 }
