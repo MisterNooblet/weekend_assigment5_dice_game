@@ -193,7 +193,10 @@ img {
   border-image-repeat: stretch stretch;
   border-image-source: url('/assets/images/bgbordernofill3.png');
   border-style: solid;
-  padding: 0 2rem;
+  padding: 2rem 2rem;
+}
+.game-controls {
+  margin: 0.5rem;
 }
 .current-score {
   display: flex;
