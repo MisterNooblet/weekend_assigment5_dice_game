@@ -43,10 +43,15 @@ function rollDice() {
     }
     swapDice()
 }
-
 function swapDice() {
     let die1val = localStorage.getItem('die1');
     let die2val = localStorage.getItem('die2');
-    dice1.src = `/assets/images/${die1val}.png`
-    dice2.src = `/assets/images/${die2val}.png`
+    dice1.src = `/assets/images/${die1val}.png`;
+    dice2.src = `/assets/images/${die2val}.png`;
+    dice1.classList.toggle('dice1-anim')
+    dice2.classList.toggle('dice1-anim')
+    setTimeout(function () {
+        dice1.classList.toggle('dice1-anim')
+        dice2.classList.toggle('dice1-anim')
+    }, 500)
 }

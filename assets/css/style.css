@@ -1,5 +1,33 @@
-html {
+/* Animations */
+
+@keyframes myAnim {
+  0%,
+  100% {
+    transform: translateX(0%);
+    transform-origin: 50% 50%;
+  }
+
+  15% {
+    transform: translateX(-30px) rotate(-6deg);
+  }
+
+  30% {
+    transform: translateX(15px) rotate(6deg);
+  }
+
+  45% {
+    transform: translateX(-15px) rotate(-3.6deg);
+  }
+
+  60% {
+    transform: translateX(9px) rotate(2.4deg);
+  }
+
+  75% {
+    transform: translateX(-6px) rotate(-1.2deg);
+  }
 }
+
 body {
   margin: 0;
   padding: 0;
@@ -247,4 +275,10 @@ img {
 }
 #start-btn {
   margin-bottom: 1rem;
+}
+.dice1-anim {
+  animation: myAnim 0.5s ease-in-out 0s 1 normal none;
+}
+.dice2-anim {
+  animation: myAnim 0.5s ease-in-out 0s 1 reverse none;
 }
