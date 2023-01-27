@@ -1,3 +1,8 @@
+//localStorage perm values
+localStorage.setItem('p1TotalWins', 0);
+localStorage.setItem('p2TotalWins', 0);
+localStorage.setItem('p1Streak', 0);
+localStorage.setItem('p2Streak', 0);
 //DOM Variables
 //Buttons
 const startBtn = document.querySelector('#start-btn');
@@ -27,6 +32,10 @@ const p1wintxt = document.querySelector('#p1wintxt')
 //Sounds
 const diceRollSound = document.querySelector('#dice-roll-sound')
 const wooHooSound = document.querySelector('#woo-hoo-sound')
+const aiWinSound = document.querySelector('#ai-win-sound')
+const welcomeMusic = document.querySelector('#start-music-sound')
+const roundOne = document.querySelector('#round-one-sound')
+const gameMusic = document.querySelector('#game-music-sound')
 //Event Listeners
 startBtn.addEventListener('click', startGame);
 aiBtn.addEventListener('click', startGameAI);
@@ -43,6 +52,10 @@ function startGame(params) {
     gameWindow.style.display = ''
     holdBtn.disabled = true;
     updateUI()
+    welcomeMusic.pause()
+    roundOne.play()
+    gameMusic.play()
+    gameMusic.volume = 0.5;
 }
 function startGameAI(params) {
     localStorage.setItem('targetScore', scoreInput.value);
@@ -52,6 +65,9 @@ function startGameAI(params) {
     gameWindow.style.display = ''
     holdBtn.disabled = true;
     updateUI()
+    welcomeMusic.pause()
+    roundOne.play()
+    gameMusic.play()
 }
 
 function holdScore() {
@@ -189,6 +205,7 @@ function declareWinner(player) {
             p1wingif.style.display = ''
         }
         p1wintxt.innerHTML = 'YOU WIN'
+        wooHooSound.play()
     } else {
         rollBtn.disabled = true;
         holdBtn.disabled = true;
@@ -200,11 +217,15 @@ function declareWinner(player) {
             p2wingif.style.display = ''
         }
         p2wintxt.innerHTML = 'YOU WIN'
+
     }
     if (player2.isAI && player !== 'P1') {
         p2wintxt.innerHTML = 'AI WINS'
+        aiWinSound.play()
+    } else {
+        wooHooSound.play()
     }
-    wooHooSound.play()
+
 }
 function newGame() {
     welcomeWindow.style.display = '';
@@ -227,4 +248,7 @@ function newGame() {
     p1Card.classList.remove('waiting')
     rollBtn.disabled = false;
     updateUI()
+    gameMusic.pause()
+    welcomeMusic.play()
+
 }
