@@ -55,7 +55,7 @@ function startGame(params) {
     welcomeMusic.pause()
     roundOne.play()
     gameMusic.play()
-    gameMusic.volume = 0.5;
+    gameMusic.volume = 0.3;
 }
 function startGameAI(params) {
     localStorage.setItem('targetScore', scoreInput.value);
