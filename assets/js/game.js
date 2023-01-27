@@ -24,6 +24,7 @@ const p2wintxt = document.querySelector('#p2wintxt')
 const p1wintxt = document.querySelector('#p1wintxt')
 //Sounds
 const diceRollSound = document.querySelector('#dice-roll-sound')
+const wooHooSound = document.querySelector('#woo-hoo-sound')
 //Event Listeners
 startBtn.addEventListener('click', startGame);
 rollBtn.addEventListener('click', rollDice);
@@ -157,4 +158,5 @@ function declareWinner(player) {
         }
         p2wintxt.innerHTML = 'YOU WIN'
     }
+    wooHooSound.play()
 }
