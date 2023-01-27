@@ -4,6 +4,7 @@ const startBtn = document.querySelector('#start-btn');
 const rollBtn = document.querySelector('#roll-btn');
 const holdBtn = document.querySelector('#hold-btn');
 const aiBtn = document.querySelector('#ai-btn');
+const newGameBtn = document.querySelector('#newgame-btn')
 //windows
 const welcomeWindow = document.querySelector('#welcome-container');
 const gameWindow = document.querySelector('#game-container');
@@ -31,6 +32,7 @@ startBtn.addEventListener('click', startGame);
 aiBtn.addEventListener('click', startGameAI);
 rollBtn.addEventListener('click', rollDice);
 holdBtn.addEventListener('click', holdScore)
+newGameBtn.addEventListener('click', newGame)
 //functions
 //Game mechanics
 function startGame(params) {
@@ -40,6 +42,7 @@ function startGame(params) {
     welcomeWindow.style.display = 'none';
     gameWindow.style.display = ''
     holdBtn.disabled = true;
+    updateUI()
 }
 function startGameAI(params) {
     localStorage.setItem('targetScore', scoreInput.value);
@@ -48,8 +51,8 @@ function startGameAI(params) {
     welcomeWindow.style.display = 'none';
     gameWindow.style.display = ''
     holdBtn.disabled = true;
+    updateUI()
 }
-
 
 function holdScore() {
     let player1 = JSON.parse(localStorage.getItem('player1'))
@@ -202,4 +205,26 @@ function declareWinner(player) {
         p2wintxt.innerHTML = 'AI WINS'
     }
     wooHooSound.play()
+}
+function newGame() {
+    welcomeWindow.style.display = '';
+    gameWindow.style.display = 'none'
+    p2wintxt.innerHTML = ''
+    p1wintxt.innerHTML = ''
+    for (let i = 0; i < p1cbBox.length; i++) {
+        p1cbBox[i].style.display = ''
+        p1wingif.style.display = 'none'
+    }
+    for (let i = 0; i < p2cbBox.length; i++) {
+        p2cbBox[i].style.display = ''
+        p2wingif.style.display = 'none'
+    }
+    p2wintxt.innerHTML = ''
+    p1wintxt.innerHTML = ''
+    p1Card.classList.remove('winner')
+    p2Card.classList.remove('winner')
+    p2Card.classList.add('waiting')
+    p1Card.classList.remove('waiting')
+    rollBtn.disabled = false;
+    updateUI()
 }
