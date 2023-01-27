@@ -3,6 +3,7 @@
 const startBtn = document.querySelector('#start-btn');
 const rollBtn = document.querySelector('#roll-btn');
 const holdBtn = document.querySelector('#hold-btn');
+const aiBtn = document.querySelector('#ai-btn');
 //windows
 const welcomeWindow = document.querySelector('#welcome-container');
 const gameWindow = document.querySelector('#game-container');
@@ -27,6 +28,7 @@ const diceRollSound = document.querySelector('#dice-roll-sound')
 const wooHooSound = document.querySelector('#woo-hoo-sound')
 //Event Listeners
 startBtn.addEventListener('click', startGame);
+aiBtn.addEventListener('click', startGameAI);
 rollBtn.addEventListener('click', rollDice);
 holdBtn.addEventListener('click', holdScore)
 //functions
@@ -39,28 +41,54 @@ function startGame(params) {
     gameWindow.style.display = ''
     holdBtn.disabled = true;
 }
+function startGameAI(params) {
+    localStorage.setItem('targetScore', scoreInput.value);
+    localStorage.setItem('player1', JSON.stringify({ totalScore: 0, currentScore: 0, isPlaying: true }));
+    localStorage.setItem('player2', JSON.stringify({ totalScore: 0, currentScore: 0, isPlaying: false, isAI: true }));
+    welcomeWindow.style.display = 'none';
+    gameWindow.style.display = ''
+    holdBtn.disabled = true;
+}
+
 
 function holdScore() {
     let player1 = JSON.parse(localStorage.getItem('player1'))
     let player2 = JSON.parse(localStorage.getItem('player2'))
-    if (player1.isPlaying) {
+    if (player1.isPlaying && player2.isAI) {
         player1.totalScore += player1.currentScore;
         player1.currentScore = 0;
         player1.isPlaying = false;
         player2.isPlaying = true;
         localStorage.setItem('player1', JSON.stringify(player1))
         localStorage.setItem('player2', JSON.stringify(player2))
-    } else {
+        holdBtn.disabled = true;
+        // rollBtn.disabled = true;
+        updateUI()
+        checkScores()
+        AI();
+    } else if (player1.isPlaying) {
+        player1.totalScore += player1.currentScore;
+        player1.currentScore = 0;
+        player1.isPlaying = false;
+        player2.isPlaying = true;
+        localStorage.setItem('player1', JSON.stringify(player1))
+        localStorage.setItem('player2', JSON.stringify(player2))
+        holdBtn.disabled = true;
+        updateUI()
+        checkScores()
+    }
+    else if (player2.isPlaying) {
         player2.totalScore += player2.currentScore;
         player2.currentScore = 0;
         player1.isPlaying = true;
         player2.isPlaying = false;
         localStorage.setItem('player2', JSON.stringify(player2))
         localStorage.setItem('player1', JSON.stringify(player1))
+        holdBtn.disabled = true;
+        updateUI()
+        checkScores()
     }
-    holdBtn.disabled = true;
-    updateUI()
-    checkScores()
+
 }
 
 function rollDice() {
@@ -109,6 +137,18 @@ function checkScores() {
         p2Card.classList.toggle('waiting')
     }
 }
+
+//AI Player
+function AI() {
+    let totalScore = localStorage.getItem('targetScore');
+    let player1 = JSON.parse(localStorage.getItem('player1'))
+    let player2 = JSON.parse(localStorage.getItem('player2'))
+    if (player1.totalScore < totalScore) {
+        rollDice()
+    }
+
+    holdScore()
+}
 //DOM Manipulation Functions
 function swapDice() {
     let die1val = localStorage.getItem('die1');
@@ -134,7 +174,7 @@ function updateUI() {
 }
 
 function declareWinner(player) {
-
+    let player2 = JSON.parse(localStorage.getItem('player2'))
     if (player === 'P1') {
         rollBtn.disabled = true;
         holdBtn.disabled = true;
@@ -157,6 +197,9 @@ function declareWinner(player) {
             p2wingif.style.display = ''
         }
         p2wintxt.innerHTML = 'YOU WIN'
+    }
+    if (player2.isAI && player !== 'P1') {
+        p2wintxt.innerHTML = 'AI WINS'
     }
     wooHooSound.play()
 }
