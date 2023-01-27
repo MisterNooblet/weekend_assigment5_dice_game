@@ -36,6 +36,7 @@ function startGame(params) {
     localStorage.setItem('player2', JSON.stringify({ totalScore: 0, currentScore: 0, isPlaying: false, isAI: false }));
     welcomeWindow.style.display = 'none';
     gameWindow.style.display = ''
+    holdBtn.disabled = true;
 }
 
 function holdScore() {
@@ -56,6 +57,7 @@ function holdScore() {
         localStorage.setItem('player2', JSON.stringify(player2))
         localStorage.setItem('player1', JSON.stringify(player1))
     }
+    holdBtn.disabled = true;
     updateUI()
     checkScores()
 }
@@ -67,15 +69,24 @@ function rollDice() {
     let die2 = Math.floor(Math.random() * 6) + 1
     localStorage.setItem('die1', die1)
     localStorage.setItem('die2', die2)
-    if (player1.isPlaying) {
+    if (player1.isPlaying === true) {
         player1.currentScore += die1 + die2
-
         localStorage.setItem('player1', JSON.stringify(player1))
+        if (die1 + die2 == 12) {
+            player1.currentScore = 0
+            localStorage.setItem('player1', JSON.stringify(player1))
+            holdScore()
+        }
     } else {
         player2.currentScore += die1 + die2
-
         localStorage.setItem('player2', JSON.stringify(player2))
+        if (die1 + die2 == 12) {
+            player2.currentScore = 0
+            localStorage.setItem('player2', JSON.stringify(player2))
+            holdScore()
+        }
     }
+    holdBtn.disabled = false;
     updateUI()
     swapDice()
 }
@@ -84,28 +95,14 @@ function checkScores() {
     let totalScore = localStorage.getItem('targetScore');
     let player1 = JSON.parse(localStorage.getItem('player1'))
     let player2 = JSON.parse(localStorage.getItem('player2'))
-    if (player1.totalScore > totalScore) {
-        rollBtn.disabled = true;
-        holdBtn.disabled = true;
-        p1Card.classList.add('waiting')
-        p2Card.classList.add('winner')
-        p2Card.classList.remove('waiting')
-        for (let i = 0; i < p2cbBox.length; i++) {
-            p2cbBox[i].style.display = 'none'
-            p2wingif.style.display = ''
-        }
-        p2wintxt.innerHTML = 'YOU WIN'
+    if (player2.totalScore == totalScore) {
+        declareWinner('P2')
+    } else if (player1.totalScore == totalScore) {
+        declareWinner('P1')
     } else if (player2.totalScore > totalScore) {
-        rollBtn.disabled = true;
-        holdBtn.disabled = true;
-        p2Card.classList.add('waiting')
-        p1Card.classList.add('winner')
-        p1Card.classList.remove('waiting')
-        for (let i = 0; i < p1cbBox.length; i++) {
-            p1cbBox[i].style.display = 'none'
-            p1wingif.style.display = ''
-        }
-        p1wintxt.innerHTML = 'YOU WIN'
+        declareWinner('P1')
+    } else if (player1.totalScore > totalScore) {
+        declareWinner('P2')
     } else {
         p1Card.classList.toggle('waiting')
         p2Card.classList.toggle('waiting')
@@ -133,4 +130,31 @@ function updateUI() {
     p2Current.innerHTML = `${player2.currentScore}`
     p2Total.innerHTML = `${player2.totalScore}`
     p1Total.innerHTML = `${player1.totalScore}`
+}
+
+function declareWinner(player) {
+
+    if (player === 'P1') {
+        rollBtn.disabled = true;
+        holdBtn.disabled = true;
+        p2Card.classList.add('waiting')
+        p1Card.classList.add('winner')
+        p1Card.classList.remove('waiting')
+        for (let i = 0; i < p1cbBox.length; i++) {
+            p1cbBox[i].style.display = 'none'
+            p1wingif.style.display = ''
+        }
+        p1wintxt.innerHTML = 'YOU WIN'
+    } else {
+        rollBtn.disabled = true;
+        holdBtn.disabled = true;
+        p1Card.classList.add('waiting')
+        p2Card.classList.add('winner')
+        p2Card.classList.remove('waiting')
+        for (let i = 0; i < p2cbBox.length; i++) {
+            p2cbBox[i].style.display = 'none'
+            p2wingif.style.display = ''
+        }
+        p2wintxt.innerHTML = 'YOU WIN'
+    }
 }
