@@ -2,9 +2,7 @@
 body {
   font-size: 50%;
 }
-#gamewindow {
-  padding: 60px;
-}
+
 .flex-column {
   display: flex;
   flex-direction: column;
@@ -22,7 +20,7 @@ body {
   flex-direction: column;
   height: 90vh;
   /* width: 100vw;  */
-  margin: 40px;
+  padding-bottom: 60px;
 }
 .player-card {
   flex-direction: column;
