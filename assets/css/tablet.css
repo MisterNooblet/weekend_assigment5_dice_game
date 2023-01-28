@@ -2,9 +2,7 @@
 body {
   font-size: 62.5%;
 }
-#gamewindow {
-  padding: 60px;
-}
+
 .flex-column {
   display: flex;
   flex-direction: column;
