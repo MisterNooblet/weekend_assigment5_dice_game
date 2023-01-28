@@ -48,7 +48,7 @@ holdBtn.addEventListener('click', holdScore)
 newGameBtn.addEventListener('click', newGame)
 //functions
 //Game mechanics
-function startGame(params) {
+function startGame(params) {//initiates game session for two players.
     localStorage.setItem('targetScore', scoreInput.value);
     localStorage.setItem('player1', JSON.stringify({ totalScore: 0, currentScore: 0, isPlaying: true }));
     localStorage.setItem('player2', JSON.stringify({ totalScore: 0, currentScore: 0, isPlaying: false, isAI: false }));
@@ -62,7 +62,7 @@ function startGame(params) {
     gameMusic.volume = 0.3;
     wooHooSound.volume = 0.4;
 }
-function startGameAI(params) {
+function startGameAI(params) {//initiates game session vs AI1
     localStorage.setItem('targetScore', scoreInput.value);
     localStorage.setItem('player1', JSON.stringify({ totalScore: 0, currentScore: 0, isPlaying: true }));
     localStorage.setItem('player2', JSON.stringify({ totalScore: 0, currentScore: 0, isPlaying: false, isAI: true }));
@@ -75,10 +75,10 @@ function startGameAI(params) {
     gameMusic.play()
 }
 
-function holdScore() {
+function holdScore() {// a function to hold the current score
     let player1 = JSON.parse(localStorage.getItem('player1'))
     let player2 = JSON.parse(localStorage.getItem('player2'))
-    if (player1.isPlaying && player2.isAI) {
+    if (player1.isPlaying && player2.isAI) { // checks if game is in vs AI Session and updates accordingly scores accordingly , and finally calls the AI function to play.
         player1.totalScore += player1.currentScore;
         player1.currentScore = 0;
         player1.isPlaying = false;
@@ -86,11 +86,10 @@ function holdScore() {
         localStorage.setItem('player1', JSON.stringify(player1))
         localStorage.setItem('player2', JSON.stringify(player2))
         holdBtn.disabled = true;
-        // rollBtn.disabled = true;
         updateUI()
         checkScores()
         AI();
-    } else if (player1.isPlaying) {
+    } else if (player1.isPlaying) {//if current player is Player 1 , updates his score and sets Player 2 to active player
         player1.totalScore += player1.currentScore;
         player1.currentScore = 0;
         player1.isPlaying = false;
@@ -101,7 +100,7 @@ function holdScore() {
         updateUI()
         checkScores()
     }
-    else if (player2.isPlaying) {
+    else if (player2.isPlaying) {//if current player is Player 2 , updates his score and sets Player 1 to active player
         player2.totalScore += player2.currentScore;
         player2.currentScore = 0;
         player1.isPlaying = true;
@@ -115,27 +114,27 @@ function holdScore() {
 
 }
 
-function rollDice() {
+function rollDice() {//Handles the dice rolling event and calls UI update , and dice image swap functions.
     let player1 = JSON.parse(localStorage.getItem('player1'))
     let player2 = JSON.parse(localStorage.getItem('player2'))
     let die1 = Math.floor(Math.random() * 6) + 1
     let die2 = Math.floor(Math.random() * 6) + 1
-    localStorage.setItem('die1', die1)
-    localStorage.setItem('die2', die2)
-    if (player1.isPlaying === true) {
+    localStorage.setItem('die1', die1)//sets roll outcome for die number 1 so we can later update the image accordingly
+    localStorage.setItem('die2', die2)//sets roll outcome for die number 2 so we can later update the image accordingly
+    if (player1.isPlaying === true) {//if Player 1 is playing store his current score and push it to localStorage 
         player1.currentScore += die1 + die2
         localStorage.setItem('player1', JSON.stringify(player1))
-        if (die1 + die2 == 12) {
+        if (die1 + die2 == 12) {//if its a 6,6 roll pause turn pass for 2 seconds
             rollBtn.disabled = true;
             player1.currentScore = 0
             localStorage.setItem('player1', JSON.stringify(player1))
             setTimeout(holdScore, 2000)
             setTimeout(function () { rollBtn.disabled = false; }, 2000)
         }
-    } else {
+    } else {//if Player 2 is playing store his current score and push it to localStorage
         player2.currentScore += die1 + die2
         localStorage.setItem('player2', JSON.stringify(player2))
-        if (die1 + die2 == 12) {
+        if (die1 + die2 == 12) {//if its a 6,6 roll pause turn pass for 2 seconds
             rollBtn.disabled = true;
             player2.currentScore = 0
             localStorage.setItem('player2', JSON.stringify(player2))
@@ -148,7 +147,7 @@ function rollDice() {
     swapDice()
 }
 
-function checkScores() {
+function checkScores() {//checks if any opponent won
     let totalScore = localStorage.getItem('targetScore');
     let player1 = JSON.parse(localStorage.getItem('player1'))
     let player2 = JSON.parse(localStorage.getItem('player2'))
@@ -163,24 +162,24 @@ function checkScores() {
     } else if (player1.totalScore > totalScore) {
         declareWinner('P2')
     } else {
-        p1Card.classList.toggle('waiting')
-        p2Card.classList.toggle('waiting')
+        p1Card.classList.toggle('waiting')//swaps between waiting state for player cards
+        p2Card.classList.toggle('waiting')//
     }
 }
 
 //AI Player
-function AI() {
+function AI() {//ai player executes dice roll function , and later holds score. simple as that.
     let totalScore = localStorage.getItem('targetScore');
     let player1 = JSON.parse(localStorage.getItem('player1'))
     let player2 = JSON.parse(localStorage.getItem('player2'))
-    if (player1.totalScore < totalScore && player2.totalScore < totalScore) {
+    if (player1.totalScore < totalScore && player2.totalScore < totalScore) {//prevents our ai from rolling after victory or defeat.
         rollDice()
         holdScore()
     }
 
 }
 //DOM Manipulation Functions
-function swapDice() {
+function swapDice() {//swaps the dice images on screen and activates their shake animation.
     let die1val = localStorage.getItem('die1');
     let die2val = localStorage.getItem('die2');
     dice1.src = `/assets/images/${die1val}.png`;
@@ -194,7 +193,7 @@ function swapDice() {
     }, 500)
 }
 
-function updateUI() {
+function updateUI() {//updates ui with current and total scores
     let player1 = JSON.parse(localStorage.getItem('player1'))
     let player2 = JSON.parse(localStorage.getItem('player2'))
     p1Current.innerHTML = `${player1.currentScore}`
@@ -203,7 +202,7 @@ function updateUI() {
     p1Total.innerHTML = `${player1.totalScore}`
 }
 
-function updateScores(player) {
+function updateScores(player) {//updates streak and total victories counter and pushes those updates to our UI.(called from declareWinner function)
     let p1TotalWins = Number(localStorage.getItem('p1TotalWins'));
     let p2TotalWins = Number(localStorage.getItem('p2TotalWins'));
     let p1Streak = Number(localStorage.getItem('p1Streak'));
@@ -230,7 +229,7 @@ function updateScores(player) {
     localStorage.setItem('p1Streak', p1Streak);
     localStorage.setItem('p2Streak', p2Streak);
 }
-function declareWinner(player) {
+function declareWinner(player) {//Declares a winner , manipulates card color , replaces current score with an image as well as plays a sound. ( callled from check scores function)
     let player2 = JSON.parse(localStorage.getItem('player2'))
 
     if (player === 'P1') {
@@ -271,7 +270,7 @@ function declareWinner(player) {
     }
 
 }
-function newGame() {
+function newGame() {//resets all ui states and updates UI
     welcomeWindow.style.display = '';
     gameWindow.style.display = 'none'
     p2wintxt.innerHTML = ''
