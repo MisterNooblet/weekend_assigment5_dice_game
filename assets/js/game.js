@@ -40,6 +40,7 @@ const aiWinSound = document.querySelector('#ai-win-sound')
 const welcomeMusic = document.querySelector('#start-music-sound')
 const roundOne = document.querySelector('#round-one-sound')
 const gameMusic = document.querySelector('#game-music-sound')
+const sixSix = document.querySelector('#six-roll-sound')
 //Event Listeners
 startBtn.addEventListener('click', startGame);
 aiBtn.addEventListener('click', startGameAI);
@@ -125,6 +126,7 @@ function rollDice() {//Handles the dice rolling event and calls UI update , and 
         player1.currentScore += die1 + die2
         localStorage.setItem('player1', JSON.stringify(player1))
         if (die1 + die2 == 12) {//if its a 6,6 roll pause turn pass for 2 seconds
+            sixSix.play()
             rollBtn.disabled = true;
             player1.currentScore = 0
             localStorage.setItem('player1', JSON.stringify(player1))
@@ -135,6 +137,7 @@ function rollDice() {//Handles the dice rolling event and calls UI update , and 
         player2.currentScore += die1 + die2
         localStorage.setItem('player2', JSON.stringify(player2))
         if (die1 + die2 == 12) {//if its a 6,6 roll pause turn pass for 2 seconds
+            sixSix.play()
             rollBtn.disabled = true;
             player2.currentScore = 0
             localStorage.setItem('player2', JSON.stringify(player2))
