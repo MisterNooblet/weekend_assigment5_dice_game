@@ -7,7 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dice Game</title>
     <link rel="stylesheet" href="/assets/css/fonts.css">
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <!-- <link rel="stylesheet" href="/assets/css/style.css"> -->
+    <link rel="stylesheet" media="screen and (min-width: 992px)" href="assets/css/style.css" />
+    <link rel="stylesheet" media="screen and (max-width: 767px) and (orientation : portrait)"
+        href="assets/css/mobile.css" />
+    <link rel="stylesheet" media="screen and (min-width: 768px) and (max-width: 991px) and (orientation : portrait)"
+        href="assets/css/tablet.css" />
     <link rel="icon" type="image/x-icon" href="/assets/images/favicon/icons8-dice-justicon-lineal-color-16.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,6 +38,7 @@
                 <button id="ai-btn" class="btn">PLAY VS AI</button>
             </div>
         </div>
+
         <div id="game-container" class="gamecontainer" style="display: none;">
             <div id="p1-card" class="player-card">
                 <H1>Player 1</H1>
@@ -68,6 +74,7 @@
         </div>
     </section>
     <audio id="dice-roll-sound" src="/assets/sounds/roll.mp3"></audio>
+    <audio id="six-roll-sound" src="/assets/sounds/66roll.mp3"></audio>
     <audio id="woo-hoo-sound" src="/assets/sounds/woohoo.mp3"></audio>
     <audio id="ai-win-sound" src="/assets/sounds/aiwin.mp3"></audio>
     <audio id="round-one-sound" src="/assets/sounds/round1.mp3"></audio>

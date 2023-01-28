@@ -1,0 +1,42 @@
+@import url('/assets/css/style.css');
+body {
+  font-size: 50%;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.5rem;
+}
+.intro-btns {
+  display: flex;
+  flex-direction: column;
+}
+#game-container {
+  display: flex;
+  flex-direction: column;
+  /* height: 90vh;
+  width: 100vw; */
+  margin: 40px;
+}
+.player-card {
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 0;
+  justify-content: center;
+}
+.game-controls {
+  flex-direction: row;
+  padding: 0;
+  align-content: space-around;
+}
+.current-score {
+  flex-grow: 0;
+}
+#p1score-total,
+#p2score-total {
+  font-size: 2rem;
+  padding-bottom: 0.5rem;
+}

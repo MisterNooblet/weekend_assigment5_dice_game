@@ -126,17 +126,21 @@ function rollDice() {
         player1.currentScore += die1 + die2
         localStorage.setItem('player1', JSON.stringify(player1))
         if (die1 + die2 == 12) {
+            rollBtn.disabled = true;
             player1.currentScore = 0
             localStorage.setItem('player1', JSON.stringify(player1))
-            holdScore()
+            setTimeout(holdScore, 2000)
+            setTimeout(function () { rollBtn.disabled = false; }, 2000)
         }
     } else {
         player2.currentScore += die1 + die2
         localStorage.setItem('player2', JSON.stringify(player2))
         if (die1 + die2 == 12) {
+            rollBtn.disabled = true;
             player2.currentScore = 0
             localStorage.setItem('player2', JSON.stringify(player2))
-            holdScore()
+            setTimeout(holdScore, 2000)
+            setTimeout(function () { rollBtn.disabled = false; }, 2000) //holdScore()
         }
     }
     holdBtn.disabled = false;
@@ -259,7 +263,7 @@ function declareWinner(player) {
 
     if (player2.isAI && player !== 'P1') {
         p2wintxt.innerHTML = 'AI WINS'
-        // aiWinSound.play()
+        aiWinSound.play()
 
     } else {
         wooHooSound.play()
