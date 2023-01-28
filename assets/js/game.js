@@ -29,6 +29,10 @@ const p1cbBox = document.querySelectorAll('.p1cb-box')
 const p2cbBox = document.querySelectorAll('.p2cb-box')
 const p2wintxt = document.querySelector('#p2wintxt')
 const p1wintxt = document.querySelector('#p1wintxt')
+const p1totalWins = document.querySelector('#p1total-wins')
+const p1streak = document.querySelector('#p1streak')
+const p2totalWins = document.querySelector('#p2total-wins')
+const p2streak = document.querySelector('#p2streak')
 //Sounds
 const diceRollSound = document.querySelector('#dice-roll-sound')
 const wooHooSound = document.querySelector('#woo-hoo-sound')
@@ -56,6 +60,7 @@ function startGame(params) {
     roundOne.play()
     gameMusic.play()
     gameMusic.volume = 0.3;
+    wooHooSound.volume = 0.4;
 }
 function startGameAI(params) {
     localStorage.setItem('targetScore', scoreInput.value);
@@ -143,6 +148,8 @@ function checkScores() {
     let totalScore = localStorage.getItem('targetScore');
     let player1 = JSON.parse(localStorage.getItem('player1'))
     let player2 = JSON.parse(localStorage.getItem('player2'))
+
+
     if (player2.totalScore == totalScore) {
         declareWinner('P2')
     } else if (player1.totalScore == totalScore) {
@@ -162,11 +169,11 @@ function AI() {
     let totalScore = localStorage.getItem('targetScore');
     let player1 = JSON.parse(localStorage.getItem('player1'))
     let player2 = JSON.parse(localStorage.getItem('player2'))
-    if (player1.totalScore < totalScore) {
+    if (player1.totalScore < totalScore && player2.totalScore < totalScore) {
         rollDice()
+        holdScore()
     }
 
-    holdScore()
 }
 //DOM Manipulation Functions
 function swapDice() {
@@ -192,8 +199,36 @@ function updateUI() {
     p1Total.innerHTML = `${player1.totalScore}`
 }
 
+function updateScores(player) {
+    let p1TotalWins = Number(localStorage.getItem('p1TotalWins'));
+    let p2TotalWins = Number(localStorage.getItem('p2TotalWins'));
+    let p1Streak = Number(localStorage.getItem('p1Streak'));
+    let p2Streak = Number(localStorage.getItem('p2Streak'));
+
+    if (player === 'P1') {
+        p1TotalWins += 1;
+        p1Streak += 1;
+        p1totalWins.innerHTML = `Total Wins: ${p1TotalWins}`
+        p1streak.innerHTML = `Streak: ${p1Streak}`
+        p2Streak = 0;
+        p2streak.innerHTML = `Streak: ${p2Streak}`
+
+    } else if (player === 'P2') {
+        p2TotalWins += 1;
+        p2Streak += 1;
+        p2totalWins.innerHTML = `Total Wins: ${p2TotalWins}`
+        p2streak.innerHTML = `Streak: ${p2Streak}`
+        p1Streak = 0;
+        p1streak.innerHTML = `Streak: ${p1Streak}`
+    }
+    localStorage.setItem('p1TotalWins', p1TotalWins);
+    localStorage.setItem('p2TotalWins', p2TotalWins);
+    localStorage.setItem('p1Streak', p1Streak);
+    localStorage.setItem('p2Streak', p2Streak);
+}
 function declareWinner(player) {
     let player2 = JSON.parse(localStorage.getItem('player2'))
+
     if (player === 'P1') {
         rollBtn.disabled = true;
         holdBtn.disabled = true;
@@ -205,6 +240,7 @@ function declareWinner(player) {
             p1wingif.style.display = ''
         }
         p1wintxt.innerHTML = 'YOU WIN'
+        updateScores('P1')
         wooHooSound.play()
     } else {
         rollBtn.disabled = true;
@@ -217,13 +253,17 @@ function declareWinner(player) {
             p2wingif.style.display = ''
         }
         p2wintxt.innerHTML = 'YOU WIN'
+        updateScores('P2')
 
     }
+
     if (player2.isAI && player !== 'P1') {
         p2wintxt.innerHTML = 'AI WINS'
-        aiWinSound.play()
+        // aiWinSound.play()
+
     } else {
         wooHooSound.play()
+        return
     }
 
 }
